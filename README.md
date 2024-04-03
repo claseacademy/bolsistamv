@@ -1,4 +1,4 @@
-## ✨ COMO USARLO E INSTALARLO
+### ✨ COMO USARLO E INSTALARLO
 
 > Clonar el repositorio en cualquier carpeta
 
@@ -44,12 +44,12 @@ Enlace web local del sistema `http://127.0.0.1:8000/`.
 
 > USUARIOS
 
-# ADMINISTRADOR
+### ADMINISTRADOR
 
   USERNAME:  admin
   PASSWORD:  admin123
 
-# USUARIO DE PRUEBAS
+### USUARIO DE PRUEBAS
 
   USERNAME:  usuario
   PASSWORD:  adm12345
