@@ -1,0 +1,485 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+PAGINA PRINCIPAL DEL PROYECTO O DASHBOARD
+
+AQUI SE MUESTRAN LAS ETAPAS DEL USUARIO REGISTRADO EN EL SISTEMA
+
+TAMBIEN LAS FECHAS PERTINENTES DEL MISMO
+
+-->
+
+
+<!--img src="/static/assets/img/barra.jpg"-->
+<div class="container">
+
+</div>
+
+    <div class="content">
+        <div class="container-fluid">
+
+            {% if request.user.id != 3 %}
+            <div class="accordion" id="accordionExample">
+                <div class="steps">
+                    <progress id="progress" value=0 max=100 ></progress>
+                    {% for et in etapa %}
+                    <div class="step-item">
+                        <div class="step-title">
+                            {{ et.fecha_etapa }}
+                        </div>
+                            {% if et.tipo_etapa == 1 %}
+                                <button class="step-button text-center collapsed {% if et.status_etapa == 1 %}done{% endif %}" id="e{{et.tipo_etapa}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    {% if et.status_etapa == 1 %}
+                                        <i class="fa fa-check" id="chk{{et.tipo_etapa}}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </button>
+                            {% elif et.tipo_etapa == 2 %}
+                                <button class="step-button text-center collapsed {% if et.status_etapa == 1 %}done{% endif %}" id="e{{et.tipo_etapa}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    {% if et.status_etapa == 1 %}
+                                        <i class="fa fa-check" id="chk{{et.tipo_etapa}}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </button>
+                            {% elif et.tipo_etapa == 3 %}
+                                <button class="step-button text-center collapsed {% if et.status_etapa == 1 %}done{% endif %}" id="e{{et.tipo_etapa}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    {% if et.status_etapa == 1 %}
+                                        <i class="fa fa-check" id="chk{{et.tipo_etapa}}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </button>
+                            {% elif et.tipo_etapa == 4 %}
+                                <button class="step-button text-center collapsed {% if et.status_etapa == 1 %}done{% endif %}" id="e{{et.tipo_etapa}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    {% if et.status_etapa == 1 %}
+                                        <i class="fa fa-check" id="chk{{et.tipo_etapa}}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </button>
+                            {% elif et.tipo_etapa == 5 %}
+                                <button class="step-button text-center collapsed {% if et.status_etapa == 1 %}done{% endif %}" id="e{{et.tipo_etapa}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    {% if et.status_etapa == 1 %}
+                                        <i class="fa fa-check" id="chk{{et.tipo_etapa}}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </button>
+                            {% endif %}
+
+                        <div class="step-title">
+                            {% if et.tipo_etapa == 1 %}
+                                <span>Inicio</span>
+                            {% elif et.tipo_etapa == 2 %}
+                                <span>Revisión</span>
+                            {% elif et.tipo_etapa == 3 %}
+                                <span>Preaprobación</span>
+                            {% elif et.tipo_etapa == 4 %}
+                                <span>Aprobación</span>
+                            {% elif et.tipo_etapa == 5 %}
+                                <span>Desembolso</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!--div class="step-item">
+                        <div class="step-title">
+                            Dic 1
+                        </div>
+                        <button class="step-button text-center" id="e1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                        <div class="step-title">
+                            <span>Inicio</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-title">
+                            Dic 4
+                        </div>
+                        <button class="step-button text-center collapsed" id="e2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+                        </button>
+                        <div class="step-title">
+                            <span>Revisión</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-title">
+                            Dic 7
+                        </div>
+                        <button class="step-button text-center collapsed" id="e3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                        </button>
+                        <div class="step-title">
+                            <span>Preaprobación</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-title">
+                            Dec 31
+                        </div>
+                        <button class="step-button text-center collapsed" id="e4" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                        </button>
+                        <div class="step-title">
+                            <span>Aprobación</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-title">
+                            Jun 7
+                        </div>
+                        <button class="step-button text-center collapsed" id="e5" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                        </button>
+                        <div class="step-title">
+                            <span>Desembolso</span>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+            {% endif %}
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-3" style="font-size: 40px;">My Dashboard</h4>
+                            <p class="card-category">Portal Home
+                                <a href="#">Client Area</a>
+                            </p>
+                        </div>
+
+
+
+                        <div class="card-body all-icons">
+                            <div class="row">
+
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">1</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">30</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">12</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">11</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-danger"></i>
+                                        <p class="num text-danger">5</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">4</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-info"></i>
+                                        <p class="num text-info">7</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-success">1</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">8</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">19</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-danger"></i>
+                                        <p class="num text-danger">30</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-xl-2 col-lg-2 col-md-3 col-sm-4">
+                                    <div class="font-icon-detail">
+                                        <i class="fa fa-circle text-success"></i>
+                                        <p class="num text-info">3</p>
+                                        <p>Prestamos</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card ">
+                        <div class="card-header ">
+                            <h4 class="card-title">Email Statistics</h4>
+                            <p class="card-category">Last Campaign Performance</p>
+                        </div>
+                        <div class="card-body ">
+                            <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> Open
+                                <i class="fa fa-circle text-danger"></i> Bounce
+                                <i class="fa fa-circle text-warning"></i> Unsubscribe
+                            </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card ">
+                        <div class="card-header ">
+                            <h4 class="card-title">Users Behavior</h4>
+                            <p class="card-category">24 Hours performance</p>
+                        </div>
+                        <div class="card-body ">
+                            <div id="chartHours" class="ct-chart"></div>
+                        </div>
+                        <div class="card-footer ">
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> Open
+                                <i class="fa fa-circle text-danger"></i> Click
+                                <i class="fa fa-circle text-warning"></i> Click Second Time
+                            </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated 3 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card ">
+                        <div class="card-header ">
+                            <h4 class="card-title">2017 Sales</h4>
+                            <p class="card-category">All products including Taxes</p>
+                        </div>
+                        <div class="card-body ">
+                            <div id="chartActivity" class="ct-chart"></div>
+                        </div>
+                        <div class="card-footer ">
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> Tesla Model S
+                                <i class="fa fa-circle text-danger"></i> BMW 5 Series
+                            </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-check"></i> Data information certified
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card  card-tasks">
+                        <div class="card-header ">
+                            <h4 class="card-title">Tasks</h4>
+                            <p class="card-category">Backend development</p>
+                        </div>
+                        <div class="card-body ">
+                            <div class="table-full-width">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                            </td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Read "Following makes Medium better"</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" disabled>
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Unfollow 5 enemies from twitter</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer ">
+                            <hr>
+                            <div class="stats">
+                                <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div-->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+        //demo.showNotification();
+
+    });
+</script>
+
+{% endblock javascripts %}

@@ -1,0 +1,185 @@
+{% extends "layouts/basepublic.html" %}
+
+{% block title %} Register {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+PAGINA DE REGISTRO DEL PROYECTO
+-->
+
+
+<div class="container">
+    <div class="screen_register">
+
+        <div class="screen__content">
+            <div class="central-login">
+                <h4>Registro</h4>
+            </div>
+            <form class="register"  role="form" method="post" action="">
+                {% csrf_token %}
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    {{ form.username }}
+                    <span class="text-error">{{ form.username.errors }}</span>
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    {{ form.email }}
+                    <span class="text-error">{{ form.email.errors }}</span>
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    {{ form.password1 }}
+                    <span class="text-error">{{ form.email.errors }}</span>
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    {{ form.password2 }}
+                    <span class="text-error">{{ form.password2.errors }}</span>
+                </div>
+                <button class="button login__submit" name="register" type="submit">
+                    <span class="button__text">Registrarse</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="social-login">
+                <!--h4>Bienvenido</h4-->
+                <a href="{% url 'login' %}" style="color: #FFFFFF;" > <h5>Login</h5></a>
+                <!--div class="social-icons">
+                    <a href="#" class="social-login__icon fab fa-instagram"></a>
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="#" class="social-login__icon fab fa-twitter"></a>
+                </div-->
+            </div>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
+
+    <!--div class="content">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Register</h4>
+                            <br />
+                            <p>
+                                {% if msg %}
+                                    {{ msg | safe }}
+                                {% else %}
+                                    Add your credentials
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="card-body">
+
+                            <form role="form" method="post" action="">
+
+                                {% csrf_token %} 
+                                
+                                <div class="row">
+
+                                    <div class="col-md-1 px-1">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 px-1">
+                                        <div class="form-group">
+                                            {{ form.username }}
+                                        </div>
+                                    </div>
+                                    <span class="text-error">{{ form.username.errors }}</span>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-1 px-1">
+                                        <div class="form-group">
+                                            <label>eMail</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 px-1">
+                                        <div class="form-group">
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                    <span class="text-error">{{ form.email.errors }}</span>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-1 pl-1">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 pl-1">
+                                        <div class="form-group">
+                                            {{ form.password1 }}
+                                        </div>
+                                    </div>
+                                    <span class="text-error">{{ form.password1.errors }}</span>
+
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-1 pl-1">
+                                        <div class="form-group">
+                                            <label>Check</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 pl-1">
+                                        <div class="form-group">
+                                            {{ form.password2 }}
+                                        </div>
+                                    </div>
+                                    <span class="text-error">{{ form.password2.errors }}</span>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-1 pl-1"></div>
+
+                                    <div class="col-md-5 pl-1">
+                                        <button name="register" type="submit" class="btn btn-info btn-fill">Register</button>
+
+                                        &nbsp; &nbsp; Have an account? <a href="{% url 'login' %}" >Login</a>
+                                        <div class="clearfix"></div>                                        
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div-->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
