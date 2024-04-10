@@ -1,0 +1,78 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+PAGINA DE LAS ETAPAS DE UN USUARIO
+
+BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
+
+
+-->
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 d-flex flex-row-reverse">
+                    <a href="form_capital_operaciones" class="btn btn-primary">Crear Capital de Operación</a>
+                </div>
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Capital de Operaciones</h4>
+                            <p class="card-category">Información</p>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Capital de Inversión</th>
+                                    <th>Fecha Operacion</th>
+                                    <th>Monto</th>
+                                    <th>Status</th>
+                                    <th>Opciones</th>
+                                </thead>
+                                <tbody>
+                                    {% for capital in capitaloperaciones %}
+                                    <tr>
+                                        <td>{{ capital.id }}</td>
+                                        <td>{{ capital.id_capital_inversion }}</td>
+                                        <td>{{ capital.fecha_operacion }}</td>
+                                        <td>{{ capital.monto_operacion }}</td>
+                                        <td>{{ capital.status_operacion }}</td>
+                                        <td>
+
+
+                                            <form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{capital.id}}">
+                                                {% csrf_token %}
+                                                <button style="cursor: pointer;" type="submit" class="btn btn-primary">Editar</button>
+                                            </form>
+
+
+                                            <a href="destroyCapital/{{capital.id}}/2" class="pl-2">
+                                                <button class="btn btn-danger">Eliminar</button>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

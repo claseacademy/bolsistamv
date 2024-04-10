@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+FORMULARIO DE CAPITAL DE INVERSION
+
+
+-->
+
+
+<div class="content">
+    <div class="container-fluid">
+    	<div class="row">
+
+    		<div class="col-md-12 d-flex flex-row-reverse">
+            	<a href="table_tipo_inversion" class="btn btn-primary">Ver Tipos de Inversión</a>
+            </div>
+
+    		<div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                    	<h4 class="card-title">Capital de Inversión</h4>
+                        <p class="card-category">Formulario</p>
+                    </div>
+
+
+                    <!--  Aqui va el formulario -->
+
+
+
+					        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+					            <h3>Actualizar Capital de Inversión</h3>
+					            <!--p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>
+					                <h5 class="text-center mb-4">Powering world-class companies</h5-->
+
+					                {% for cap in capitalinversion %}
+
+					                <form class="form-card" method="POST" class="post-form" action="/form_capital_inversion_store">
+					                	{% csrf_token %}
+
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Tipo de Inversión<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<select class="formu-input" id="tipo_inversion" name="tipo_inversion">
+
+					                        		{% for tipoinv in tipoinversion %}
+					                        			{% if tipoinv.id == cap.tipo_inversion %}
+					                        				<option value="{{tipoinv.id}}">{{tipoinv.name_tipo_inversion}}</option>
+					                        			{% endif %}
+					                        		{% endfor %}
+
+
+					                        		{% for tipoinv in tipoinversion %}
+					                        		<option value="{{tipoinv.id}}">{{tipoinv.name_tipo_inversion}}</option>
+					                        		{% endfor %}
+
+					                        	</select>
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Fecha de Inversión<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="date" class="formu-input" id="fecha_inversion" name="fecha_inversion" value="{{cap.fecha_inversion}}">
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Fecha de retorno<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="date" class="formu-input" id="fecha_retorno_inversion" name="fecha_retorno_inversion" value="{{cap.fecha_retorno_inversion}}">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Moneda<span class="text-danger"> * </span>
+					                        	</label>
+					                        	<select class="formu-input" id="moneda_inversion" name="moneda_inversion">
+					                        		<option value="{{cap.moneda_inversion}}">{{cap.moneda_inversion}}</option>
+					                        		<option value="USD">USD</option>
+					                        		<option value="RD$">RD$</option>
+					                        	</select>
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Monto<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="number" step="0.10" class="formu-input" id="monto_inversion" name="monto_inversion" onblur="validate(2)" value="{{cap.monto_inversion}}">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Interes<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="number" step="0.10" class="formu-input" id="interes_inversion" name="interes_inversion" onblur="validate(3)" value="{{cap.interes_inversion}}">
+					                        </div>
+					                    </div>
+
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Inversionistas<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<select class="formu-input" id="id_user" name="id_user">
+
+					                        		{% for item in usuario %}
+					                        			{% if item.id == cap.id_user %}
+					                        				<option value="{{ item.id }}">{{ item.username }}</option>
+					                        			{% endif %}
+													{% endfor %}
+
+					                        		{% for item in usuario %}
+					                        		<option value="{{ item.id }}">{{ item.username }}</option>
+													{% endfor %}
+					                        	</select>
+					                        </div>
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-end">
+					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input">Actualizar Capital Inversión</button> </div>
+					                    </div>
+					                </form>
+
+					            {% endfor %}
+
+					        </div>
+
+
+
+                </div>
+            </div>
+
+    	</div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,101 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+PAGINA DE LAS ETAPAS DE UN USUARIO
+
+BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
+
+
+-->
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 d-flex flex-row-reverse">
+                    <a href="form_capital_inversion" class="btn btn-primary">Crear Capital de Inversión</a>
+                </div>
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Capital de Inversión</h4>
+                            <p class="card-category">Información</p>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Tipo de Inversión</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha Inversión</th>
+                                    <th>Fecha Retorno</th>
+                                    <th>Moneda</th>
+                                    <th>Monto</th>
+                                    <th>Interes</th>
+                                    <th>Status</th>
+                                    <th>Opciones</th>
+                                </thead>
+                                <tbody>
+                                    {% for capital in capitalinversion %}
+                                    <tr>
+                                        <td>{{ capital.id }}</td>
+                                        <td>
+                                        {% for tipoinv in tipoinversion %}
+                                            {% if tipoinv.id == capital.tipo_inversion %}
+                                                {{tipoinv.name_tipo_inversion}}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </td>
+                                        <td>
+                                        {% for us in usuario %}
+                                            {% if us.id == capital.id_user %}
+                                                {{us.username}}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </td>
+                                        <td>{{ capital.fecha_inversion }}</td>
+                                        <td>{{ capital.fecha_retorno_inversion }}</td>
+                                        <td>{{ capital.moneda_inversion }}</td>
+                                        <td>{{ capital.monto_inversion }}</td>
+                                        <td>{{ capital.interes_inversion }}</td>
+                                        <td>
+                                            {% if capital.status_inversion == 1 %}
+                                                Activo
+                                            {% endif %}
+                                        </td>
+                                        <td>
+
+                                            <form method="POST" class="post-form pl-2" action="/form_capital_inversion_edit/{{capital.id}}">
+                                                {% csrf_token %}
+                                                <button style="cursor: pointer;" type="submit" class="btn btn-primary">Editar</button>
+                                            </form>
+
+
+                                            <a href="destroyCapital/{{capital.id}}/1" class="pl-2">
+                                                <button class="btn btn-danger">Eliminar</button>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

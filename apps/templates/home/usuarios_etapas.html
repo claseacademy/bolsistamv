@@ -20,6 +20,9 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12 d-flex flex-row-reverse">
+                    <a href="create_user" class="btn btn-primary">Crear Usuario</a>
+                </div>
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
@@ -43,6 +46,7 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
                                         <td>{{ et.first_name }} {{ et.last_name }}</td>
                                         <td>{{ et.email }}</td>
                                         <td>
+
                                             <form method="POST" class="post-form" action="/etapa_id/{{et.id}}">
                                                 {% csrf_token %}
                                                 {% if et.status_etapa == 1 %}
@@ -52,6 +56,12 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
                                                 {% endif %}
                                                 <button style="cursor: pointer;" type="submit" class="btn btn-primary">Cambiar Estados</button>
                                             </form>
+
+                                            <form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{et.id}}">
+                                                {% csrf_token %}
+                                                <button style="cursor: pointer;" type="submit" class="btn btn-primary">Información Adicional</button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                     {% endfor %}

@@ -1,0 +1,77 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+FORMULARIO DE CAPITAL DE INVERSION
+
+
+-->
+
+
+<div class="content">
+    <div class="container-fluid">
+    	<div class="row">
+
+    		<div class="col-md-12 d-flex flex-row-reverse">
+            	<a href="table_tipo_inversion" class="btn btn-primary">Ver Tipos de Inversión</a>
+            </div>
+
+    		<div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                    	<!--h4 class="card-title">Capital de Inversión</h4-->
+                        <p class="card-category">Formulario</p>
+                    </div>
+
+
+                    <!--  Aqui va el formulario -->
+
+
+
+					        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+					            <h4>Registrar Tipo de Inversión</h4>
+					            <!--p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>
+					                <h5 class="text-center mb-4">Powering world-class companies</h5-->
+
+
+					                <form class="form-card" method="POST" class="post-form" action="/form_tipo_inversion_store">
+					                	{% csrf_token %}
+
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Tipo de Inversión<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="name_tipo_inversion" name="name_tipo_inversion" required placeholder="">
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-end">
+					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input">Guardar</button> </div>
+					                    </div>
+					                </form>
+
+					        </div>
+
+
+
+                </div>
+            </div>
+
+    	</div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

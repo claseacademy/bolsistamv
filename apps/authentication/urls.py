@@ -12,6 +12,6 @@ urlpatterns = [
     path('login/', login_view, name="login"),
     path('register/', register_user, name="register"),
     path("logout/", LogoutView.as_view(), name="logout"),
-    path('etapa_id/<int:id>', views.etapa_id, name='etapa_id'),
-    path('edit_status_etapa_id/<int:id>/<int:idu>', views.etapa_id, name='etapa_id'),
+    #path('etapa_id/<int:id>', views.etapa_id, name='etapa_id'),
+    #path('edit_status_etapa_id/<int:id>/<int:idu>', views.etapa_id, name='etapa_id'),
 ]

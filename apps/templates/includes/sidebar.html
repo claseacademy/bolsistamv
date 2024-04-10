@@ -51,6 +51,24 @@ BARRA LATERAL PRINCIPAL DEL SISTEMA PARA EL ACCESO A LAS DIRENTES OPCIONES
                     <p>Users</p>
                 </a>
             </li>
+            <li class="nav-item nav-item {% if 'user' in segment %} active {% endif %}">
+                <a class="nav-link" href="/table_capital_inversion">
+                    <i class="nc-icon nc-chart-bar-32"></i>
+                    <p>Capital de Inversión</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item {% if 'user' in segment %} active {% endif %}">
+                <a class="nav-link" href="/table_capital_operaciones">
+                    <i class="nc-icon nc-chart-bar-32"></i>
+                    <p>Capital de Operaciones</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item {% if 'user' in segment %} active {% endif %}">
+                <a class="nav-link" href="/table_capital_prestamos">
+                    <i class="nc-icon nc-chart-bar-32"></i>
+                    <p>Capital de Préstamos</p>
+                </a>
+            </li>
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="/user.html">

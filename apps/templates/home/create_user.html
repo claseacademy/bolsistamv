@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+FORMULARIO DE CREAR USUARIOS
+
+
+-->
+
+
+<div class="content">
+    <div class="container-fluid">
+    	<div class="row">
+
+    		<div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                    	<h4 class="card-title">Creación de usuario</h4>
+                        <p class="card-category">Formulario</p>
+                    </div>
+
+
+                    <!--  Aqui va el formulario -->
+
+
+
+					        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+					            <h3>Registro de Usuario</h3>
+					            <!--p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>
+					                <h5 class="text-center mb-4">Powering world-class companies</h5
+
+					            onsubmit="event.preventDefault()"
+					        -->
+
+
+					                <form class="form-card" method="POST" class="post-form" action="/store_user">
+					                	{% csrf_token %}
+
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Username<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<input type="text" id="username" class="formu-input" id="username" name="username" placeholder="Username" onblur="validate(1)">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Nombre<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="first_name" name="first_name" placeholder="Nombres" onblur="validate(2)">
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Apellido<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="last_name" name="last_name" placeholder="Apellidos" onblur="validate(3)">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Correo<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="email" name="email" placeholder="Correo" onblur="validate(4)">
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Numero Telefonico<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="telefono" name="telefono" placeholder="+00000000000" onblur="validate(5)">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Tipo de Usuario<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<select class="formu-input" id="id_tipo_usuario" name="id_tipo_usuario">
+					                        	{% for grupo in grupos %}
+					                        		<option value="{{ grupo.id }}">{{ grupo.name }}</option>
+					                        	{% endfor %}
+					                        	</select>
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Documento<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="documento" name="documento" placeholder="000000000" onblur="validate(6)"> </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Sexo<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<select class="formu-input" id="sexo" name="sexo">
+					                        		<option value="1">Masculino</option>
+					                        		<option value="2">Femenino</option>
+					                        		<option value="3">Otro</option>
+					                        	</select>
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-end">
+					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input">Registrar Usuario</button> </div>
+					                    </div>
+					                </form>
+
+					        </div>
+
+
+
+                </div>
+            </div>
+
+    	</div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

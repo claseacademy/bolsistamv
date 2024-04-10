@@ -32,6 +32,8 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1', 'https://' + 
 
 # Application definition
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 INSTALLED_APPS = [
     'jet',
     'django.contrib.admin',
