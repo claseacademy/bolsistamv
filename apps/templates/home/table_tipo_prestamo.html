@@ -21,62 +21,47 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 d-flex flex-row-reverse">
-                    <a href="form_capital_prestamos" class="btn btn-primary">Crear Capital de Prestamo</a>
+                    <a href="form_tipo_prestamo" class="btn btn-primary">Crear Nuevo Tipo de Prestamo</a>
                 </div>
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <h4 class="card-title">Capital de Prestamos</h4>
+                            <h4 class="card-title">Tipos de Prestamo</h4>
                             <p class="card-category">Información</p>
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <th>ID</th>
-                                    <th>Etapa del Prestamo</th>
                                     <th>Tipo de Prestamo</th>
-                                    <th>Fecha</th>
-                                    <th>Tiempo</th>
-                                    <th>Taza de Interes</th>
-                                    <th>Monto Solicitado</th>
-                                    <th>Firma</th>
-                                    <th>Status</th>
-                                    <th>Opciones</th>
+                                    <th>Calculo</th>
+                                    <th>Valor</th>
                                 </thead>
                                 <tbody>
-                                    {% for capital in capitalprestamos %}
+                                    {% for capital in tipoinversion %}
                                     <tr>
                                         <td>{{ capital.id }}</td>
-                                        <td>{{ capital.id_etapas }}</td>
+                                        <td>{{ capital.name_tipo_prestamo }}</td>
                                         <td>
-                                            {% for tipo in tipoprestamo %}
-                                                {% if tipo.id == capital.tipo_prestamo %}
-                                                    {{ tipo.name_tipo_prestamo }}
-                                                {% endif %}
-                                            {% endfor %}
-
-                                        </td>
-                                        <td>{{ capital.fecha_prestamo }}</td>
-                                        <td>{{ capital.tiempo_prestamo }}</td>
-                                        <td>{{ capital.taza_interes_prestamo }}</td>
-                                        <td>{{ capital.monto_solicitado_prestamo }}</td>
-                                        <td>{{ capital.firma_prestamo }}</td>
-                                        <td>
-                                            {% if capital.status_prestamo == 1 %}
-                                                Activo
-                                            {% else %}
-                                                Inactivo
+                                            {% if capital.calculo_prestamo == 1 %}
+                                                Frances
+                                            {% elif capital.calculo_prestamo == 2 %}
+                                                Alemán
+                                            {% elif capital.calculo_prestamo == 3 %}
+                                                Simple
                                             {% endif %}
                                         </td>
+                                        <td>{{ capital.calculo_prestamo_valor }}</td>
                                         <td>
+
 
                                             <!--form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{capital.id}}">
                                                 {% csrf_token %}
                                                 <button style="cursor: pointer;" type="submit" class="btn btn-primary">Editar</button>
                                             </form-->
 
-                                            <a href="destroyCapital/{{capital.id}}/3" class="pl-2">
-                                                <button  class="btn btn-danger">Eliminar</button>
+                                            <a href="destroyCapital/{{capital.id}}/5" class="pl-2">
+                                                <button class="btn btn-danger">Eliminar</button>
                                             </a>
 
                                         </td>

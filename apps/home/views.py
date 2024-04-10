@@ -17,7 +17,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 
 from apps.home.forms import UsuarioForm
-from apps.home.models import Usuario, UsuarioExtra, CapitalInversion, CapitalOperaciones, CapitalPrestamos, TipoInversion
+from apps.home.models import Usuario, UsuarioExtra, CapitalInversion, CapitalOperaciones, CapitalPrestamos, TipoInversion, TipoPrestamo
 from django.contrib.auth.models import User, Group
 
 from apps.home.models import Etapas
@@ -330,11 +330,17 @@ def table_capital_operaciones(request):
 
     capitalinversion = CapitalInversion.objects.all().order_by('id').values()
     capitaloperaciones = CapitalOperaciones.objects.all().order_by('id').values()
+    usuarioextra = UsuarioExtra.objects.filter(id_tipo_usuario=1).order_by('id')
+    usuario = []
+    for x in usuarioextra:
+        e = Usuario.objects.filter(id=x.id_user)
+        usuario.append({'id':x.id_user, 'username':e[0].username})
     #usuario = User.objects.all().exclude(id=2).exclude(id=3)
     template = loader.get_template('home/table_capital_operaciones.html')
     context = {
         'capitalinversion': capitalinversion,
         'capitaloperaciones': capitaloperaciones,
+        'usuario': usuario,
         'alert': "",
     }
     return HttpResponse(template.render(context, request))
@@ -398,10 +404,12 @@ def form_capital_operaciones_store(request):
 def table_capital_prestamos(request):
 
     capitalprestamos = CapitalPrestamos.objects.all().order_by('id').values()
+    tipoprestamo = TipoPrestamo.objects.all().order_by('id').values()
     #usuario = User.objects.all().exclude(id=2).exclude(id=3)
     template = loader.get_template('home/table_capital_prestamos.html')
     context = {
         'capitalprestamos': capitalprestamos,
+        'tipoprestamo': tipoprestamo,
         'alert': "",
     }
     return HttpResponse(template.render(context, request))
@@ -409,10 +417,12 @@ def table_capital_prestamos(request):
 @login_required(login_url="/login/")
 def form_capital_prestamos(request):
 
+    tipoprestamo = TipoPrestamo.objects.all().order_by('id').values()
     #grupos = Group.objects.all().order_by('id').values()
     #usuario = User.objects.all().exclude(id=2).exclude(id=3)
     template = loader.get_template('home/form_capital_prestamos.html')
     context = {
+        'tipoprestamo': tipoprestamo,
         'alert': "",
     }
     return HttpResponse(template.render(context, request))
@@ -426,13 +436,13 @@ def form_capital_prestamos_store(request):
             CapitalPrestamos.objects.create(
                 id_user=1,
                 id_etapas=1,
-                tipo_prestamo=1,
+                tipo_prestamo=request.POST["tipo_prestamo"],
                 fecha_prestamo=request.POST["fecha_prestamo"],
                 tiempo_prestamo=request.POST["tiempo_prestamo"],
                 taza_interes_prestamo=request.POST["taza_interes_prestamo"],
                 monto_solicitado_prestamo=request.POST["monto_solicitado_prestamo"],
                 firma_prestamo=request.POST["firma_prestamo"],
-                status_prestamo=0
+                status_prestamo=1
             )
             return redirect("/table_capital_prestamos")
         except:
@@ -448,6 +458,50 @@ def form_capital_prestamos_store(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+@login_required(login_url="/login/")
+def table_tipo_prestamo(request):
+
+    tipoprestamo = TipoPrestamo.objects.all().order_by('id').values()
+    #usuario = User.objects.all().exclude(id=2).exclude(id=3)
+    template = loader.get_template('home/table_tipo_prestamo.html')
+    context = {
+        'tipoinversion': tipoprestamo,
+        'alert': "",
+    }
+    return HttpResponse(template.render(context, request))
+
+
+@login_required(login_url="/login/")
+def form_tipo_prestamo(request):
+
+    #tipoinversion = TipoInversion.objects.all().order_by('id').values()
+    #usuario = User.objects.all().exclude(id=2).exclude(id=3)
+    template = loader.get_template('home/form_tipo_prestamo.html')
+    context = {
+        #'tipoinversion': tipoinversion,
+        'alert': "",
+    }
+    return HttpResponse(template.render(context, request))
+
+@login_required(login_url="/login/")
+def form_tipo_prestamo_store(request):
+
+    if request.method == "POST":
+
+        verificando = TipoPrestamo.objects.filter(name_tipo_prestamo=request.POST["name_tipo_prestamo"]).exists()
+        if verificando == False:
+            try:
+                TipoPrestamo.objects.create(
+                    name_tipo_prestamo=request.POST["name_tipo_prestamo"],
+                    calculo_prestamo=request.POST["calculo_prestamo"],
+                    calculo_prestamo_valor=request.POST["calculo_prestamo_valor"]
+                )
+                return redirect("/table_tipo_prestamo")
+            except:
+                pass
+
+    return redirect("/table_tipo_prestamo")
 
 
 # CAPITAL DE PRESTAMOS
@@ -465,6 +519,14 @@ def destroyCapital(request, id, modelo):
         return redirect("/table_capital_operaciones")
     elif modelo == 3:
         dele = CapitalPrestamos.objects.get(id=id)
+        dele.delete()
+        return redirect("/table_capital_prestamos")
+    elif modelo == 4:
+        dele = TipoInversion.objects.get(id=id)
+        dele.delete()
+        return redirect("/table_capital_prestamos")
+    elif modelo == 5:
+        dele = TipoPrestamo.objects.get(id=id)
         dele.delete()
         return redirect("/table_capital_prestamos")
 

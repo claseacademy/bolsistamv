@@ -43,17 +43,28 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
                                     {% for capital in capitaloperaciones %}
                                     <tr>
                                         <td>{{ capital.id }}</td>
-                                        <td>{{ capital.id_capital_inversion }}</td>
+                                        <td>
+
+                                            {% for capitalinv in capitalinversion %}
+                                                        {% for item in usuario %}
+                                                            {% if capitalinv.id_user == item.id %}
+                                                                <option value="{{capitalinv.id}}">{{capitalinv.id}} {{ item.username }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                            {% endfor %}
+
+
+                                        </td>
                                         <td>{{ capital.fecha_operacion }}</td>
                                         <td>{{ capital.monto_operacion }}</td>
                                         <td>{{ capital.status_operacion }}</td>
                                         <td>
 
 
-                                            <form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{capital.id}}">
+                                            <!--form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{capital.id}}">
                                                 {% csrf_token %}
                                                 <button style="cursor: pointer;" type="submit" class="btn btn-primary">Editar</button>
-                                            </form>
+                                            </form-->
 
 
                                             <a href="destroyCapital/{{capital.id}}/2" class="pl-2">

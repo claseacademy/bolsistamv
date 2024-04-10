@@ -45,6 +45,10 @@ urlpatterns = [
     path('form_capital_prestamos', views.form_capital_prestamos, name='form_capital_prestamos'),
     path('form_capital_prestamos_store', views.form_capital_prestamos_store, name='form_capital_prestamos_store'),
 
+    path('table_tipo_prestamo', views.table_tipo_prestamo, name='table_tipo_prestamo'),
+    path('form_tipo_prestamo', views.form_tipo_prestamo, name='form_tipo_prestamo'),
+    path('form_tipo_prestamo_store', views.form_tipo_prestamo_store, name='form_tipo_prestamo_store'),
+
     # general
     path('destroyCapital/<int:id>/<int:modelo>', views.destroyCapital, name='destroyCapital'),
 

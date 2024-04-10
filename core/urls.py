@@ -48,6 +48,11 @@ urlpatterns = [
     path("form_capital_prestamos/", include("apps.home.urls")),
     path("form_capital_prestamos_store/", include("apps.home.urls")),
 
+
+    path("table_tipo_prestamo/", include("apps.home.urls")),
+    path("form_tipo_prestamo/", include("apps.home.urls")),
+    path("form_tipo_prestamo_store/", include("apps.home.urls")),
+
     # General
 
     path("destroyCapital/<int:id>/<int:modelo>", include("apps.home.urls")),

@@ -20,6 +20,10 @@ FORMULARIO DE CAPITAL DE INVERSION
     <div class="container-fluid">
     	<div class="row">
 
+    		<div class="col-md-12 d-flex flex-row-reverse">
+            	<a href="table_tipo_prestamo" class="btn btn-primary">Ver Tipos de Prestamos</a>
+            </div>
+
     		<div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
@@ -45,7 +49,11 @@ FORMULARIO DE CAPITAL DE INVERSION
 					                        <div class="form-group col-sm-6 flex-column d-flex">
 					                        	<label class="form-control-label px-3">Tipo de Prestamo<span class="text-danger"> *  {{alert}}</span>
 					                        	</label>
-					                        	<input type="text" class="formu-input" id="tipo_prestamo" name="tipo_prestamo" placeholder="" onblur="validate(1)">
+					                        	<select class="formu-input" id="tipo_prestamo" name="tipo_prestamo">
+					                        		{% for tipo in tipoprestamo %}
+					                        			<option value="{{tipo.id}}">{{tipo.name_tipo_prestamo}}</option>
+					                        		{% endfor %}
+					                        	</select>
 					                        </div>
 					                        <div class="form-group col-sm-6 flex-column d-flex">
 					                        	<label class="form-control-label px-3">Fecha de Prestamo<span class="text-danger"> *</span>

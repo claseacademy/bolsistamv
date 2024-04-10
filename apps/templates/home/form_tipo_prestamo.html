@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Etapas {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--
+
+
+FORMULARIO DE CAPITAL DE INVERSION
+
+
+-->
+
+
+<div class="content">
+    <div class="container-fluid">
+    	<div class="row">
+
+    		<div class="col-md-12 d-flex flex-row-reverse">
+            	<a href="table_tipo_prestamo" class="btn btn-primary">Ver Tipos de Prestamos</a>
+            </div>
+
+    		<div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                    	<!--h4 class="card-title">Capital de Inversión</h4-->
+                        <p class="card-category">Formulario</p>
+                    </div>
+
+
+                    <!--  Aqui va el formulario -->
+
+
+
+					        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+					            <h4>Registrar Tipo de Prestamo</h4>
+					            <!--p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>
+					                <h5 class="text-center mb-4">Powering world-class companies</h5-->
+
+
+					                <form class="form-card" method="POST" class="post-form" action="/form_tipo_prestamo_store">
+					                	{% csrf_token %}
+
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Tipo de Prestamo<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<input type="text" class="formu-input" id="name_tipo_prestamo" name="name_tipo_prestamo" required placeholder="">
+					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Forma de Calculo<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<select  class="formu-input" id="calculo_prestamo" name="calculo_prestamo">
+					                        		<option value="1">Frances</option>
+					                        		<option value="2">Alemán</option>
+					                        		<option value="3">Simple</option>
+					                        	</select>
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-between text-left">
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Valor del Calculo<span class="text-danger"> *  {{alert}}</span>
+					                        	</label>
+					                        	<input type="number" step="0.1" class="formu-input" id="calculo_prestamo_valor" name="calculo_prestamo_valor" required >
+					                        </div>
+					                    </div>
+					                    <div class="row justify-content-end">
+					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input">Guardar</button> </div>
+					                    </div>
+					                </form>
+
+					        </div>
+
+
+
+                </div>
+            </div>
+
+    	</div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -111,3 +111,13 @@ class CapitalPrestamos(models.Model):
     status_prestamo = models.IntegerField()
     class Meta:
         db_table = "capital_prestamos"
+
+
+
+class TipoPrestamo(models.Model):
+    id = models.IntegerField(primary_key = True)
+    name_tipo_prestamo = models.CharField(max_length=250)
+    calculo_prestamo = models.IntegerField()
+    calculo_prestamo_valor = models.DecimalField(max_digits=10, decimal_places=2)
+    class Meta:
+        db_table = "tipo_prestamo"
