@@ -48,6 +48,8 @@ urlpatterns = [
     path("form_capital_prestamos/", include("apps.home.urls")),
     path("form_capital_prestamos_store/", include("apps.home.urls")),
 
+    # calculo de cuotas de prestamos
+    path("form_calculo_cuota_prestamo/", include("apps.home.urls")),
 
     path("table_tipo_prestamo/", include("apps.home.urls")),
     path("form_tipo_prestamo/", include("apps.home.urls")),

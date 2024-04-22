@@ -107,6 +107,7 @@ class CapitalPrestamos(models.Model):
     tiempo_prestamo = models.IntegerField()
     taza_interes_prestamo = models.DecimalField(max_digits=10, decimal_places=2)
     monto_solicitado_prestamo = models.DecimalField(max_digits=10, decimal_places=2)
+    moneda_prestamo = models.IntegerField()
     firma_prestamo = models.IntegerField()
     status_prestamo = models.IntegerField()
     class Meta:

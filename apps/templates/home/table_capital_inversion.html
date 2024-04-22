@@ -63,12 +63,22 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
                                         </td>
                                         <td>{{ capital.fecha_inversion }}</td>
                                         <td>{{ capital.fecha_retorno_inversion }}</td>
-                                        <td>{{ capital.moneda_inversion }}</td>
+                                        <td>
+
+                                            {% if capital.moneda_inversion == 1 %}
+                                                USD
+                                            {% elif capital.moneda_inversion == 2 %}
+                                                RD$
+                                            {% endif %}
+
+                                        </td>
                                         <td>{{ capital.monto_inversion }}</td>
                                         <td>{{ capital.interes_inversion }}</td>
                                         <td>
                                             {% if capital.status_inversion == 1 %}
                                                 Activo
+                                            {% elif capital.status_inversion == 0 %}
+                                                Inactivo
                                             {% endif %}
                                         </td>
                                         <td>

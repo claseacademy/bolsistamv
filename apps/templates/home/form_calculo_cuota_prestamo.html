@@ -27,7 +27,7 @@ FORMULARIO DE CAPITAL DE INVERSION
     		<div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
-                    	<h4 class="card-title">Capital de Prestamos</h4>
+                    	<h4 class="card-title">Calculo de Prestamo</h4>
                         <p class="card-category">Formulario</p>
                     </div>
 
@@ -38,47 +38,38 @@ FORMULARIO DE CAPITAL DE INVERSION
 
 
 					        <div class="col-xl-7 col-lg-8 col-md-9 text-center">
-					            <h3>Registro de Prestamo</h3>
+					            <h3>Calculo de Cuotas de Prestamo</h3>
 					            <!--p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>
 					                <h5 class="text-center mb-4">Powering world-class companies</h5-->
 
+					                {% for capital in capitalprestamos %}
+
+					                	<input type="hidden" id="monto{{capital.id}}" value="{{capital.monto_solicitado_prestamo}}">
+					                	<input type="hidden" id="interes{{capital.id}}" value="{{capital.taza_interes_prestamo}}">
+
+					                {% endfor %}
 
 					                <form class="form-card" method="POST" class="post-form" action="/form_capital_prestamos_store">
 					                	{% csrf_token %}
 
 					                    <div class="row justify-content-between text-left">
 					                        <div class="form-group col-sm-6 flex-column d-flex">
-					                        	<label class="form-control-label px-3">Tipo de Prestamo<span class="text-danger"> *  {{alert}}</span>
+					                        	<label class="form-control-label px-3">Prestamo
 					                        	</label>
-					                        	<select class="formu-input" id="tipo_prestamo" name="tipo_prestamo">
-					                        		{% for tipo in tipoprestamo %}
-					                        			<option value="{{tipo.id}}">{{tipo.name_tipo_prestamo}}</option>
+					                        	<select class="formu-input" onchange="selectPrestamo()" id="cap_prestamo" name="cap_prestamo">
+					                        		<option value="">Seleccionar</option>
+					                        		{% for capital in capitalprestamos %}
+					                        			<option value="{{capital.id}}">ID: {{capital.id}}</option>
 					                        		{% endfor %}
 					                        	</select>
 					                        </div>
-					                        <div class="form-group col-sm-6 flex-column d-flex">
-					                        	<label class="form-control-label px-3">Fecha de Prestamo<span class="text-danger"> *</span>
-					                        	</label>
-					                        	<input type="date" class="formu-input" id="fecha_prestamo" name="fecha_prestamo" required>
-					                        </div>
-					                    </div>
-					                    <div class="row justify-content-between text-left">
-					                        <div class="form-group col-sm-6 flex-column d-flex">
-					                        	<label class="form-control-label px-3">Tiempo de Prestamo<span class="text-danger"> *</span>
-					                        	</label>
-					                        	<input type="number" step="1" min="0" class="formu-input" id="tiempo_prestamo" name="tiempo_prestamo" onblur="validate(2)" required>
-					                        </div>
-					                        <div class="form-group col-sm-6 flex-column d-flex">
-					                        	<label class="form-control-label px-3">Taza de Interes<span class="text-danger"> *</span>
-					                        	</label>
-					                        	<input type="number" step="0.10" class="formu-input" id="taza_interes_prestamo" name="taza_interes_prestamo" onblur="validate(2)" required>
-					                        </div>
+
 					                    </div>
 					                    <div class="row justify-content-between text-left">
 					                        <div class="form-group col-sm-6 flex-column d-flex">
 					                        	<label class="form-control-label px-3">Monto del Prestamo<span class="text-danger"> *</span>
 					                        	</label>
-					                        	<input type="number" step="0.1" min="0" class="formu-input" id="monto_solicitado_prestamo" name="monto_solicitado_prestamo" onblur="validate(2)" required>
+					                        	<input type="number" step="0.1" min="0" class="formu-input" id="monto_prestamo" name="monto_prestamo" onblur="validate(2)" required>
 					                        </div>
 					                        <div class="form-group col-sm-6 flex-column d-flex">
 					                        	<label class="form-control-label px-3">Moneda<span class="text-danger"> * </span>
@@ -91,13 +82,20 @@ FORMULARIO DE CAPITAL DE INVERSION
 					                    </div>
 					                    <div class="row justify-content-between text-left">
 					                        <div class="form-group col-sm-6 flex-column d-flex">
-					                        	<label class="form-control-label px-3">Firma del Prestamo<span class="text-danger"> *</span>
+					                        	<label class="form-control-label px-3">Taza de Interes Anual<span class="text-danger"> *</span>
 					                        	</label>
-					                        	<input type="number" step="0.10" class="formu-input" id="firma_prestamo" name="firma_prestamo" onblur="validate(2)">
+					                        	<input type="number" step="0.10" class="formu-input" id="tasa_interes_prestamo" name="tasa_interes_prestamo" onblur="validate(2)" required>
 					                        </div>
+					                        <div class="form-group col-sm-6 flex-column d-flex">
+					                        	<label class="form-control-label px-3">Cuotas<span class="text-danger"> *</span>
+					                        	</label>
+					                        	<input type="number" onkeyup="cuotasAplicar()" onchange="cuotasAplicar()" min="1" max="5" class="formu-input" id="cuotas_prestamo" name="cuotas_prestamo" onblur="validate(2)" required>
+					                        </div>
+
 					                    </div>
+
 					                    <div class="row justify-content-end">
-					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input" id="registrar_prestamo">Registrar Prestamo</button> </div>
+					                        <div class="form-group col-sm-6"> <button type="submit" class=" btn-primary formu-input" id="registrar_prestamo">Calcular</button> </div>
 					                    </div>
 					                </form>
 
@@ -118,6 +116,20 @@ FORMULARIO DE CAPITAL DE INVERSION
 			                        	<span style="display: none;" id="cap_rd_error" >Error: monto invalido.</span>
 			                        </div>
 			                    </div>
+
+			                    <table class="table" id="amortizacion">
+			                    	<thead>
+			                    		<tr>
+			                    			<td>Cuota</td>
+			                    			<td>Capital</td>
+			                    			<td>Interes</td>
+			                    			<td>Balance</td>
+			                    		</tr>
+			                    	</thead>
+			                    	<tbody>
+			                    	</tbody>
+			                    </table>
+
 					        </div>
 
 				</div>

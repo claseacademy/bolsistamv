@@ -34,42 +34,50 @@ BOTON PARA CAMBIAR EL STATUS DE LA ETAPA SI ESTA APROBADA O NO
                                 <thead>
                                     <th>ID</th>
                                     <th>Capital de Inversión</th>
-                                    <th>Fecha Operacion</th>
+                                    <th>Moneda</th>
                                     <th>Monto</th>
                                     <th>Status</th>
-                                    <th>Opciones</th>
+                                    <th>Operación USD</th>
+                                    <th>Operación RD$</th>
                                 </thead>
                                 <tbody>
-                                    {% for capital in capitaloperaciones %}
+                                    {% for capital in capitalinversion %}
                                     <tr>
                                         <td>{{ capital.id }}</td>
                                         <td>
-
-                                            {% for capitalinv in capitalinversion %}
                                                         {% for item in usuario %}
-                                                            {% if capitalinv.id_user == item.id %}
-                                                                <option value="{{capitalinv.id}}">{{capitalinv.id}} {{ item.username }}</option>
+                                                            {% if capital.id_user == item.id %}
+                                                                {{ item.username }}
                                                             {% endif %}
                                                         {% endfor %}
-                                            {% endfor %}
 
 
                                         </td>
-                                        <td>{{ capital.fecha_operacion }}</td>
-                                        <td>{{ capital.monto_operacion }}</td>
-                                        <td>{{ capital.status_operacion }}</td>
+                                        <td>{{ capital.moneda_inversion }}</td>
+                                        <td>{{ capital.monto_inversion }}</td>
+                                        <td>
+                                            {% if capital.status_inversion == 1 %}
+                                                Activo
+                                            {% elif capital.status_inversion == 0 %}
+                                                Inactivo
+                                            {% endif %}
+                                        </td>
                                         <td>
 
-
-                                            <!--form method="POST" class="post-form pl-2" action="/add_info_adicional_user/{{capital.id}}">
-                                                {% csrf_token %}
-                                                <button style="cursor: pointer;" type="submit" class="btn btn-primary">Editar</button>
-                                            </form-->
+                                            {% if capital.moneda_inversion == 1 %}
+                                                {{cap_usd}}
+                                            {% endif %}
 
 
-                                            <a href="destroyCapital/{{capital.id}}/2" class="pl-2">
+                                            <!--a href="destroyCapital/{{capital.id}}/2" class="pl-2">
                                                 <button class="btn btn-danger">Eliminar</button>
-                                            </a>
+                                            </a-->
+
+                                        </td>
+                                        <td>
+                                            {% if capital.moneda_inversion == 2 %}
+                                                {{cap_rd}}
+                                            {% endif %}
 
                                         </td>
                                     </tr>

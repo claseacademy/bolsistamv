@@ -336,11 +336,26 @@ def table_capital_operaciones(request):
         e = Usuario.objects.filter(id=x.id_user)
         usuario.append({'id':x.id_user, 'username':e[0].username})
     #usuario = User.objects.all().exclude(id=2).exclude(id=3)
+
+    cap_usd = 0
+    cap_rd = 0
+
+    for capital in capitalinversion:
+        if capital['moneda_inversion'] == 1:
+            print(capital['monto_inversion'])
+            cap_usd += float(capital['monto_inversion'])
+        elif capital['moneda_inversion'] == 2:
+            print(capital['monto_inversion'])
+            cap_rd += float(capital['monto_inversion'])
+
+
     template = loader.get_template('home/table_capital_operaciones.html')
     context = {
         'capitalinversion': capitalinversion,
         'capitaloperaciones': capitaloperaciones,
         'usuario': usuario,
+        'cap_usd': cap_usd,
+        'cap_rd': cap_rd,
         'alert': "",
     }
     return HttpResponse(template.render(context, request))
@@ -417,15 +432,89 @@ def table_capital_prestamos(request):
 @login_required(login_url="/login/")
 def form_capital_prestamos(request):
 
+    capitalprestamos = CapitalPrestamos.objects.all().order_by('id').values()
+
+    pre_usd = 0
+    pre_rd = 0
+
+    for capital in capitalprestamos:
+        if capital['moneda_prestamo'] == 1:
+            print(capital['monto_solicitado_prestamo'])
+            pre_usd += float(capital['monto_solicitado_prestamo'])
+        elif capital['moneda_prestamo'] == 2:
+            print(capital['monto_solicitado_prestamo'])
+            pre_rd += float(capital['monto_solicitado_prestamo'])
+
+
+    capitalinversion = CapitalInversion.objects.all().order_by('id').values()
+
+    cap_usd = 0
+    cap_rd = 0
+
+    for capital in capitalinversion:
+        if capital['moneda_inversion'] == 1:
+            print(capital['monto_inversion'])
+            cap_usd += float(capital['monto_inversion'])
+        elif capital['moneda_inversion'] == 2:
+            print(capital['monto_inversion'])
+            cap_rd += float(capital['monto_inversion'])
+
     tipoprestamo = TipoPrestamo.objects.all().order_by('id').values()
     #grupos = Group.objects.all().order_by('id').values()
     #usuario = User.objects.all().exclude(id=2).exclude(id=3)
     template = loader.get_template('home/form_capital_prestamos.html')
     context = {
+        'cap_usd':cap_usd-pre_usd,
+        'cap_rd':cap_rd-pre_rd,
         'tipoprestamo': tipoprestamo,
         'alert': "",
     }
     return HttpResponse(template.render(context, request))
+
+@login_required(login_url="/login/")
+def form_calculo_cuota_prestamo(request):
+
+    capitalprestamos = CapitalPrestamos.objects.all().order_by('id').values()
+
+    pre_usd = 0
+    pre_rd = 0
+
+    for capital in capitalprestamos:
+        if capital['moneda_prestamo'] == 1:
+            print(capital['monto_solicitado_prestamo'])
+            pre_usd += float(capital['monto_solicitado_prestamo'])
+        elif capital['moneda_prestamo'] == 2:
+            print(capital['monto_solicitado_prestamo'])
+            pre_rd += float(capital['monto_solicitado_prestamo'])
+
+
+    capitalinversion = CapitalInversion.objects.all().order_by('id').values()
+
+    cap_usd = 0
+    cap_rd = 0
+
+    for capital in capitalinversion:
+        if capital['moneda_inversion'] == 1:
+            print(capital['monto_inversion'])
+            cap_usd += float(capital['monto_inversion'])
+        elif capital['moneda_inversion'] == 2:
+            print(capital['monto_inversion'])
+            cap_rd += float(capital['monto_inversion'])
+
+    tipoprestamo = TipoPrestamo.objects.all().order_by('id').values()
+    #grupos = Group.objects.all().order_by('id').values()
+    #usuario = User.objects.all().exclude(id=2).exclude(id=3)
+    template = loader.get_template('home/form_calculo_cuota_prestamo.html')
+    context = {
+        'cap_usd':cap_usd-pre_usd,
+        'cap_rd':cap_rd-pre_rd,
+        'tipoprestamo': tipoprestamo,
+        'capitalprestamos': capitalprestamos,
+        'alert': "",
+    }
+    return HttpResponse(template.render(context, request))
+
+
 
 @login_required(login_url="/login/")
 def form_capital_prestamos_store(request):
@@ -441,6 +530,7 @@ def form_capital_prestamos_store(request):
                 tiempo_prestamo=request.POST["tiempo_prestamo"],
                 taza_interes_prestamo=request.POST["taza_interes_prestamo"],
                 monto_solicitado_prestamo=request.POST["monto_solicitado_prestamo"],
+                moneda_prestamo=request.POST["moneda_prestamo"],
                 firma_prestamo=request.POST["firma_prestamo"],
                 status_prestamo=1
             )
